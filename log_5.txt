@@ -1,0 +1,10 @@
+vladislav@vb:~$ sudo groupadd developer				//создаем группу
+[sudo] password for vladislav: 
+vladislav@vb:~$ sudo useradd -m -G developer -s /bin/bash user1	//создаем пользователя
+vladislav@vb:~$ sudo useradd -m -G developer -s /bin/bash user2	//создаем пользователя
+
+vladislav@vb:~$ mkdir developer					//создаем файл
+
+vladislav@vb:~$ sudo chgrp developer ~/developer/		//
+vladislav@vb:~$ chmod 775 ~/developer/				//
+vladislav@vb:~$ sudo chmod g+s ~/developer/			//

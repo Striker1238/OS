@@ -1,0 +1,62 @@
+1)									
+vladislav@vlad:~/lab3$ ls						//	
+log_3.txt								//
+vladislav@vlad:~/lab3$ echo  > file1.txt				//создаем пустой файл с названием file1.txt
+vladislav@vlad:~/lab3$ ls						//
+file1.txt  log_3.txt							//
+vladislav@vlad:~cat /etc/* 2> error.txt					//читаем все файлы из каталога /etc/* полученные ошибки записываем в файл error.txt
+...
+...
+vladislav@vlad:~/lab3$ ls						//
+error.txt  file1.txt  log_3.txt						//
+vladislav@vlad:~/lab3$ cat error.txt					//выводим содержимое файла с ошибками
+cat: /etc/acpi: Is a directory						//
+cat: /etc/alsa: Is a directory						//
+cat: /etc/alternatives: Is a directory					//
+cat: /etc/apm: Is a directory						//
+...
+
+2)
+vladislav@vlad:~/lab3$ ls -l /etc/ | cut -b 1-10 | sort | uniq		//выводим все файлы, далее берем первые 10 символов и отправляем на сортировку
+drwxr-s---								//далее сортировка отправляет полученные данные в команду uniq 
+drwxr-xr-x								//только уникальные строки
+lrwxrwxrwx								//
+-r--r-----								//
+-r--r--r--								//
+-rw-r-----								//
+-rw-r--r--								//
+-rw-rw-r--								//
+-rwxr-xr-x								//
+total 1096								//
+
+3)
+vladislav@vlad:~$ sudo gedit /etc/ssh/sshd_config			//Изменяем конфигурационный файл службы SSH, отключив аутентификацию по паролю
+[sudo] password for vladislav: 						//
+...
+vladislav@vlad:~$ systemctl restart sshd				//Выполните рестарт службы
+vladislav@vlad:~$ sudo gedit /etc/ssh/sshd_config			//Изменяем конфигурационный файл службы SSH, включив аутентификацию по паролю
+vladislav@vlad:~$ systemctl reload sshd					//Даёт команду службе перечитать файлы конфигурации без остановки работы
+
+restart = stop + start							//
+reloat = продолжить работу + перечитать файлы конфигурации.		//
+vladislav@vlad:~/lab3$ cat > file2.txt					//открываем поток на запись в файл, все что будет введено ниже будет записанно
+line1									//
+line2									//
+line3									//
+line4									//
+line5									//чтобы выйти из этого режимо нужно нажать ctrl+d
+"Какой сигнал передадим процессу?" - никакой ведь ctrl+d это EOF(конец файла)
+4)
+vladislav@vlad:~/lab3$ mc						//запускаем mc
+vladislav@vlad:~/lab3$ ps -a						//выводим все текущие процессы
+    PID TTY          TIME CMD						//
+   1364 tty2     00:00:00 gnome-session-b				//
+   2314 pts/1    00:00:00 ssh						//
+   3539 pts/2    00:00:00 mc						//
+   3548 pts/0    00:00:00 ps						//
+vladislav@vlad:~/lab3$ kill -9 3539					//завершаем процесс с PID = 3539
+vladislav@vlad:~/lab3$ ps -a						//выводим все текущие процессы
+    PID TTY          TIME CMD						//
+   1364 tty2     00:00:00 gnome-session-b				//
+   2314 pts/1    00:00:00 ssh						//
+   3552 pts/0    00:00:00 ps						//

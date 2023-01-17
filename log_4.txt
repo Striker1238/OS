@@ -1,0 +1,87 @@
+1)
+ladislav@vlad:~$ mkdir lab4						//
+vladislav@vlad:~$ cd lab4						//
+vladislav@vlad:~/lab4$ cat > file1					//создаем file1 и пишем в него строки ниже
+line1
+line2
+line3
+line4
+vladislav@vlad:~/lab4$ cat file1					//выводим содержимое file1
+line1
+line2
+line3
+line4
+vladislav@vlad:~/lab4$ cp file1 file2					//копируем содержимое в file2
+vladislav@vlad:~/lab4$ ls						//выводим файлы которые сейчас есть в текущей папке
+file1  file2						
+vladislav@vlad:~/lab4$ cat file2					//выводим содержимое file2
+line1
+line2
+line3
+line4
+vladislav@vlad:~/lab4$ ln -s file1 file3				//Создаем символическую ссылку file3 на file1
+vladislav@vlad:~/lab4$ ln file1 file4					//Создаем жёсткую ссылку file4 на file1				
+vladislav@vlad:~/lab4$ ls -li						//выводим файлы которые сейчас есть в текущей папке
+total 12
+398619 -rw-rw-r-- 2 vladislav vladislav 24 окт  8 01:35 file1		//
+398637 -rw-rw-r-- 1 vladislav vladislav 24 окт  8 01:35 file2		//
+399057 lrwxrwxrwx 1 vladislav vladislav  5 окт  8 01:37 file3 -> file1	//
+398619 -rw-rw-r-- 2 vladislav vladislav 24 окт  8 01:35 file4		//
+399036 -rw-rw-r-- 1 vladislav vladislav  0 окт  8 01:36 log_4.txt	//
+vladislav@vlad:~/lab4$ rm file1						//удаляем file1
+vladislav@vlad:~/lab4$ ls -li						//
+total 8									//
+398637 -rw-rw-r-- 1 vladislav vladislav 24 окт  8 01:35 file2		//file2 остался без изменений
+399057 lrwxrwxrwx 1 vladislav vladislav  5 окт  8 01:37 file3 -> file1	//file3 -> file1 остался, но выделен красным
+398619 -rw-rw-r-- 1 vladislav vladislav 24 окт  8 01:35 file4		//file4 остался без изменений
+399036 -rw-rw-r-- 1 vladislav vladislav  0 окт  8 01:36 log_4.txt	//
+vladislav@vlad:~/lab4$ cat file2					//пытаемся вывести file2 - успешно
+line1
+line2
+line3
+line4
+vladislav@vlad:~/lab4$ cat file3					//пытаемся вывести file3 - ошибка
+cat: file3: No such file or directory					//
+vladislav@vlad:~/lab4$ cat file4					//пытаемся вывести file4 - успешно
+line1
+line2
+line3
+line4
+
+
+2)
+vladislav@vlad:~/lab4$ mv file2 newNameForFile2				//переименовываем file2 на newNameForFile2
+vladislav@vlad:~/lab4$ mv file3 newNameForFile3				//переименовываем file3 на newNameForFile3
+vladislav@vlad:~/lab4$ mv file4 newNameForFile4				//переименовываем file4 на newNameForFile4
+vladislav@vlad:~/lab4$ ls						//
+log_4.txt  newNameForFile2  newNameForFile3  newNameForFile4
+vladislav@vlad:~/lab4$ ln -s newNameForFile2 file2_link			//Создаем символическую ссылку file2_link на newNameForFile2
+vladislav@vlad:~/lab4$ ls						//
+file2_link  log_4.txt  newNameForFile2  newNameForFile3  newNameForFile4
+vladislav@vlad:~/lab4$ mv newNameForFile3 /tmp/				//Перемещаем ссылки в другую директорию
+vladislav@vlad:~/lab4$ mv newNameForFile4 /tmp/ 			//Перемещаем ссылки в другую директорию
+vladislav@vlad:~/lab4$ mv file2_link /tmp/				//Перемещаем ссылки в другую директорию
+vladislav@vlad:~/lab4$ ls						//
+log_4.txt  newNameForFile2  tmp						
+
+3)
+vladislav@vlad:~/lab4$ echo line1 > file1				//Создаем произвольный файл 
+vladislav@vlad:~/lab4$ echo line2 > file2				//Создаем произвольный файл
+vladislav@vlad:~/lab4$ ls						//
+file1  file2  log_4.txt  newNameForFile2  tmp
+vladislav@vlad:~/lab4$ chmod 664 file1					//присвоить права на чтение и запись для владельца и группы, только на чтение — для всех
+vladislav@vlad:~/lab4$ ls -l						//
+total 20
+-rw-rw-r-- 1 vladislav vladislav    6 окт  8 01:46 file1		//
+-rw-rw-r-- 1 vladislav vladislav    6 окт  8 01:46 file2		//
+-rw-rw-r-- 1 vladislav vladislav 1367 окт  8 01:40 log_4.txt
+-rw-rw-r-- 1 vladislav vladislav   24 окт  8 01:35 newNameForFile2
+drwxrwxr-x 2 vladislav vladislav 4096 окт  8 01:44 tmp
+vladislav@vlad:~/lab4$ chmod 600 file2					//присвоить права на чтение и запись только для владельца
+vladislav@vlad:~/lab4$ ls -l						//
+total 20
+-rw-rw-r-- 1 vladislav vladislav    6 окт  8 01:46 file1		//
+-rw------- 1 vladislav vladislav    6 окт  8 01:46 file2		//
+-rw-rw-r-- 1 vladislav vladislav 1367 окт  8 01:40 log_4.txt
+-rw-rw-r-- 1 vladislav vladislav   24 окт  8 01:35 newNameForFile2
+drwxrwxr-x 2 vladislav vladislav 4096 окт  8 01:44 tmp

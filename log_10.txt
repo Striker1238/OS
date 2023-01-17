@@ -1,0 +1,50 @@
+1)
+vlad@vladislav-vb:~$ sudo apt install docker -y
+vlad@vladislav-vb:~$ sudo apt update
+vlad@vladislav-vb:~$ sudo docker run -it ubuntu /bin/bash
+Unable to find image 'ubuntu:latest' locally
+latest: Pulling from library/ubuntu
+6e3729cf69e0: Pull complete
+Digest: sha256:27cb6e6ccef575a4698b66f5de06c7ecd61589132d5a91d098f7f3f9285415a9
+Status: Downloaded newer image for ubuntu:latest
+rroot@vladislav-vb:~$ ls
+bin dev home lib32 libx32 mnt proc run srv tmp var
+boot etc lib lib64 media opt root sbin sys usr
+rroot@vladislav-vb:~$ cd home
+root@vladislav-vb:/home# touch file1.txt
+root@vladislav-vb:/home# ls
+file1.txt
+root@vladislav-vb:/home# rm -r file1.txt
+root@vladislav-vb:/home# ls -la
+total 8
+drwxr-xr-x 1 root root 4096 Dec 17 15:50 .
+drwxr-xr-x 1 root root 4096 Dec 17 15:48 ..
+root@vladislav-vb:/home# exit
+exit
+
+
+2)
+vlad@vladislav-vb:~$ apt-get install apt-transport-https ca-certificates curl gnupg-agent software-properties-common -y
+vlad@vladislav-vb:~$ curl -fsSL https://download.docker.com/linux/debian/gpg | apt-key add -
+vlad@vladislav-vb:~$ add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/debian $(lsb_release -cs) stable"
+vlad@vladislav-vb:~$ apt update
+vlad@vladislav-vb:~$ docker search ubuntu
+vlad@vladislav-vb:~$ docker pull ubuntu
+vlad@vladislav-vb:~$ docker images
+REPOSITORY   TAG       IMAGE ID       CREATED       SIZE
+ubuntu       latest    a5780b118fa3   1 month ago   77.8MB
+vlad@vladislav-vb:~$ docker run -it ubuntu
+vlad@vladislav-vb:~$ nano dockerfile
+
+В файл записываю
+FROM ubuntu:latest
+MAINTAINER maxim
+RUN apt update
+RUN apt install nginx -y
+RUN DEBIAN_FRONTEND=noninteractive TZ=Etc/UTC apt-get -y install tzdata
+RUN apt install php-fpm -y
+EXPOSE 80
+CMD /usr/sbin/nginx -g "deamon off;"
+
+vlad@vladislav-vb:~$ docker build -t my-first-docker-container .
+vlad@vladislav-vb:~$ docker run -it --name my-first-docker-container -p 80:80 my-first-docker-container:latest

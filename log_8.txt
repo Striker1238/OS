@@ -1,0 +1,108 @@
+1)
+vlad@vladislav-vb:~$ mkfifo test
+vlad@vladislav-vb:~$ ll
+итого 80
+drwxr-x--- 15 vlad vlad 4096 дек  1 16:21  ./
+drwxr-xr-x  3 root root 4096 ноя 15 12:40  ../
+-rw-------  1 vlad vlad  593 ноя 30 16:44  .bash_history
+-rw-r--r--  1 vlad vlad  220 ноя 15 12:40  .bash_logout
+-rw-r--r--  1 vlad vlad 3771 ноя 15 12:40  .bashrc
+drwx------ 11 vlad vlad 4096 ноя 15 12:56  .cache/
+drwx------ 13 vlad vlad 4096 ноя 30 16:49  .config/
+drwx------  3 vlad vlad 4096 ноя 15 12:51  .local/
+-rw-r--r--  1 vlad vlad  807 ноя 15 12:40  .profile
+drwx------  4 vlad vlad 4096 ноя 30 16:44  snap/
+-rw-r--r--  1 vlad vlad    0 ноя 15 16:15  .sudo_as_admin_successful
+prw-rw-r--  1 vlad vlad    0 дек  1 16:21  test|
+-rw-rw-r--  1 vlad vlad  170 ноя 30 15:09  .wget-hsts
+drwxrwxr-x  2 vlad vlad 4096 ноя 15 16:09  zenoss/
+drwxr-xr-x  2 vlad vlad 4096 ноя 15 12:51  Видео/
+drwxr-xr-x  2 vlad vlad 4096 ноя 15 12:51  Документы/
+drwxr-xr-x  2 vlad vlad 4096 ноя 30 16:47  Загрузки/
+drwxr-xr-x  2 vlad vlad 4096 ноя 15 12:51  Изображения/
+drwxr-xr-x  2 vlad vlad 4096 ноя 15 12:51  Музыка/
+drwxr-xr-x  2 vlad vlad 4096 ноя 15 12:51  Общедоступные/
+drwxr-xr-x  2 vlad vlad 4096 ноя 15 12:51 'Рабочий стол'/
+drwxr-xr-x  2 vlad vlad 4096 ноя 15 12:51  Шаблоны/
+
+1.1)
+Console main:
+vlad@vladislav-vb:~$ echo "testmsg" > test
+
+Console 1:
+vlad@vladislav-vb:~$ tail -f ./test
+testmsg
+
+Console 2:
+
+1.2)
+Console main:
+vlad@vladislav-vb:~$ echo "testmsg" > test
+vlad@vladislav-vb:~$ echo "testmsg2" > test
+
+Console 1:
+vlad@vladislav-vb:~$ tail -f ./test
+testmsg
+
+Console 2:
+vlad@vladislav-vb:~$ tail -f ./test
+testmsg2
+
+
+
+
+
+2)
+vlad@vladislav-vb:~$ ps aux | grep tail
+vlad        2020  0.0  0.0  17056  1028 pts/0    S+   16:23   0:00 tail -f ./test
+vlad        2028  0.0  0.0  17056  1012 pts/2    S+   16:24   0:00 tail -f ./test
+vlad        2242  0.0  0.0  17756  2280 pts/1    S+   16:30   0:00 grep --color=auto tail
+
+
+2.a)
+vlad@vladislav-vb:~$ kill -l
+ 1) SIGHUP	 2) SIGINT	 3) SIGQUIT	 4) SIGILL 5) SIGTRAP
+ 6) SIGABRT	 7) SIGBUS	 8) SIGFPE	 9) SIGKILL	10) SIGUSR1
+11) SIGSEGV	12) SIGUSR2	13) SIGPIPE	14) SIGALRM	15) SIGTERM
+16) SIGSTKFLT	17) SIGCHLD	18) SIGCONT	19) SIGSTOP	20) SIGTSTP
+21) SIGTTIN	22) SIGTTOU	23) SIGURG	24) SIGXCPU	25) SIGXFSZ
+26) SIGVTALRM	27) SIGPROF	28) SIGWINCH	29) SIGIO30) SIGPWR
+31) SIGSYS	34) SIGRTMIN	35) SIGRTMIN+1	36) SIGRTMIN+2	37) SIGRTMIN+3
+38) SIGRTMIN+4	39) SIGRTMIN+5	40) SIGRTMIN+6	41) SIGRTMIN+7	42) SIGRTMIN+8
+43) SIGRTMIN+9	44) SIGRTMIN+10	45) SIGRTMIN+11	46) SIGRTMIN+12	47) SIGRTMIN+13
+48) SIGRTMIN+14	49) SIGRTMIN+15	50) SIGRTMAX-14	51) SIGRTMAX-13	52) SIGRTMAX-12
+53) SIGRTMAX-11	54) SIGRTMAX-10	55) SIGRTMAX-9	56) SIGRTMAX-8	57) SIGRTMAX-7
+58) SIGRTMAX-6	59) SIGRTMAX-5	60) SIGRTMAX-4	61) SIGRTMAX-3	62) SIGRTMAX-2
+63) SIGRTMAX-1	64) SIGRTMAX
+
+
+2.b)
+Console main:
+vlad@vladislav-vb:~$ kill -15 2020
+vlad@vladislav-vb:~$ kill -15 2028
+
+Console 1:
+vlad@vladislav-vb:~$ tail -f ./test
+testmsg
+Завершено
+vlad@vladislav-vb:~$ 
+
+Console 2:
+vlad@vladislav-vb:~$ tail -f ./test
+testmsg2
+Завершено
+vlad@vladislav-vb:~$ 
+
+
+
+3)
+vlad@vladislav-vb:~$ find /usr/ | grep --color mysql | grep --color common | sort
+/usr/share/doc/mysql-common
+/usr/share/doc/mysql-common/changelog.gz
+/usr/share/doc/mysql-common/copyright
+/usr/share/doc/mysql-common/frozen-mode
+/usr/share/doc/mysql-common/frozen-mode/downgrade
+/usr/share/doc/mysql-common/frozen-mode/README
+/usr/share/lintian/overrides/mysql-common
+/usr/share/mysql-common
+/usr/share/mysql-common/configure-symlinks

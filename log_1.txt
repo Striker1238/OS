@@ -1,0 +1,114 @@
+П.1-П.2)
+vladislav@vladislav-VirtualBox:~$ mkdir students 			//создаем каталог students
+vladislav@vladislav-VirtualBox:~$ mkdir mentors				//создаем каталог mentors
+vladislav@vladislav-VirtualBox:~$ cd students 				//переходим в каталог students 
+vladislav@vladislav-VirtualBox:~/students$ touch students_list.txt 	//создаем txt файл с название students_list
+vladislav@vladislav-VirtualBox:~/students$ cd .. 			//поднимаемся по каталогу на уровень выше
+vladislav@vladislav-VirtualBox:~$ cd mentors				//переходим в каталог mentors
+vladislav@vladislav-VirtualBox:~/mentors$  touch mentors_list.txt 	//создаем txt файл с название mentors_list
+vladislav@vladislav-VirtualBox:~/mentors$ ls -l				//выводим все файлы в текущем каталоге(mentors)
+total 0
+-rw-rw-r-- 1 vladislav vladislav 0 сен 15 12:25 mentors_list.txt	//наш только что созданный файл
+vladislav@vladislav-VirtualBox:~/mentors$ cd ..				//поднимаемся по каталогу на уровень выше
+vladislav@vladislav-VirtualBox:~$ ls -l					//выводим все файлы в текущем каталоге(в моем случае /home/vladislav)
+total 44
+drwxr-xr-x 2 vladislav vladislav 4096 сен 15 12:20 Desktop		//<--
+drwxr-xr-x 2 vladislav vladislav 4096 сен 15 12:20 Documents		//<--
+drwxr-xr-x 2 vladislav vladislav 4096 сен 15 12:20 Downloads		//<--
+drwxrwxr-x 2 vladislav vladislav 4096 сен 15 12:25 mentors		//<--созданный
+drwxr-xr-x 2 vladislav vladislav 4096 сен 15 12:20 Music		//<--		все каталоги
+drwxr-xr-x 2 vladislav vladislav 4096 сен 15 12:20 Pictures		//<--
+drwxr-xr-x 2 vladislav vladislav 4096 сен 15 12:20 Public		//<--
+drwx------ 3 vladislav vladislav 4096 сен 15 12:20 snap			//<--
+drwxrwxr-x 2 vladislav vladislav 4096 сен 15 12:24 students		//<--созданный
+drwxr-xr-x 2 vladislav vladislav 4096 сен 15 12:20 Templates		//<--
+drwxr-xr-x 2 vladislav vladislav 4096 сен 15 12:20 Videos		//<--
+vladislav@vladislav-VirtualBox:~$ ls -l students			//выводим все файлы в каталоге students
+total 0
+-rw-rw-r-- 1 vladislav vladislav 0 сен 15 12:24 students_list.txt	//наш созданный файл в каталоге students
+vladislav@vladislav-VirtualBox:~$ ls -l mentors
+total 0
+-rw-rw-r-- 1 vladislav vladislav 0 сен 15 12:24 mentors_list.txt	//наш созданный файл в каталоге mentors
+
+
+П.3)
+ladislav@vladislav-VirtualBox:~$ mv mentors/mentors_list.txt students/ 	//перемещаем файл mentors_list.txt из каталога mentors в students
+vladislav@vladislav-VirtualBox:~$ ls -l students			//выводим все файлы в каталоге students
+total 0
+-rw-rw-r-- 1 vladislav vladislav 0 сен 15 12:24 mentors_list.txt	//наш созданный файл в каталоге students
+-rw-rw-r-- 1 vladislav vladislav 0 сен 15 12:24 students_list.txt	//файл который переместили из каталога mentors
+
+
+П.4)
+vladislav@vladislav-VirtualBox:~$ rm -r mentors				//удаление каталога mentors
+vladislav@vladislav-VirtualBox:~$ ls -l					//выводим все файлы в текущем каталоге(в моем случае /home/vladislav)
+total 40
+drwxr-xr-x 2 vladislav vladislav 4096 сен 15 12:20 Desktop		//<--
+drwxr-xr-x 2 vladislav vladislav 4096 сен 15 12:20 Documents		//<--
+drwxr-xr-x 2 vladislav vladislav 4096 сен 15 12:20 Downloads		//<--
+drwxr-xr-x 2 vladislav vladislav 4096 сен 15 12:20 Music		//<--
+drwxr-xr-x 2 vladislav vladislav 4096 сен 15 12:20 Pictures		//<--		все каталоги
+drwxr-xr-x 2 vladislav vladislav 4096 сен 15 12:20 Public		//<--
+drwx------ 3 vladislav vladislav 4096 сен 15 12:20 snap			//<--
+drwxrwxr-x 2 vladislav vladislav 4096 сен 15 12:30 students		//<--созданный
+drwxr-xr-x 2 vladislav vladislav 4096 сен 15 12:20 Templates		//<--
+drwxr-xr-x 2 vladislav vladislav 4096 сен 15 12:20 Videos		//<--
+
+
+П.5)
+ladislav@vladislav-VirtualBox:~$ mv students students_and_mentors	//изменяем название каталога students на students_and_mentors	
+vladislav@vladislav-VirtualBox:~$ ls -l					//выводим все файлы в текущем каталоге(в моем случае /home/vladislav)
+total 40
+drwxr-xr-x 2 vladislav vladislav 4096 сен 15 12:20 Desktop		//<--
+drwxr-xr-x 2 vladislav vladislav 4096 сен 15 12:20 Documents		//<--
+drwxr-xr-x 2 vladislav vladislav 4096 сен 15 12:20 Downloads		//<--
+drwxr-xr-x 2 vladislav vladislav 4096 сен 15 12:20 Music		//<--
+drwxr-xr-x 2 vladislav vladislav 4096 сен 15 12:20 Pictures		//<--		все каталоги
+drwxr-xr-x 2 vladislav vladislav 4096 сен 15 12:20 Public		//<--
+drwx------ 3 vladislav vladislav 4096 сен 15 12:20 snap			//<--
+drwxrwxr-x 2 vladislav vladislav 4096 сен 15 12:30 students_and_mentors	//<--переименнованный
+drwxr-xr-x 2 vladislav vladislav 4096 сен 15 12:20 Templates		//<--
+drwxr-xr-x 2 vladislav vladislav 4096 сен 15 12:20 Videos		//<--
+
+
+П.6)
+vladislav@vladislav-VirtualBox:~$ rm -r students_and_mentors		//удаление каталога students_and_mentors		
+vladislav@vladislav-VirtualBox:~$ ls -l					//выводим все файлы в текущем каталоге(в моем случае /home/vladislav)
+total 40
+drwxr-xr-x 2 vladislav vladislav 4096 сен 15 12:20 Desktop		//<-
+drwxr-xr-x 2 vladislav vladislav 4096 сен 15 12:20 Documents		//<-
+drwxr-xr-x 2 vladislav vladislav 4096 сен 15 12:20 Downloads		//<-
+drwxr-xr-x 2 vladislav vladislav 4096 сен 15 12:20 Music		//<-
+drwxr-xr-x 2 vladislav vladislav 4096 сен 15 12:20 Pictures		//<-		все каталоги
+drwxr-xr-x 2 vladislav vladislav 4096 сен 15 12:20 Public		//<-
+drwx------ 3 vladislav vladislav 4096 сен 15 12:20 snap			//<-
+drwxr-xr-x 2 vladislav vladislav 4096 сен 15 12:20 Templates		//<-
+drwxr-xr-x 2 vladislav vladislav 4096 сен 15 12:20 Videos		//<-
+
+
+П.7)С помощью программы putty подключится по ssh протоколу к нашему удаленному серверу. Для этого надо узнать ip нашего локального
+сервера, чтобы это сделать необходимо в терминале ввести следующую команду: ip a s
+После в строке iten будет наш ip адрес. Его вводим в putty, запускаем и в появившемся терминале вводим наш логин и пароль.
+Если все сделать правильно выведет данное сообщение:
+login as: vladislav
+vladislav@192.168.0.105's password:
+Welcome to Ubuntu 22.04.1 LTS (GNU/Linux 5.15.0-47-generic x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/advantage
+
+61 updates can be applied immediately.
+19 of these updates are standard security updates.
+To see these additional updates run: apt list --upgradable
+
+Last login: Thu Sep 15 13:57:47 2022 from 192.168.0.201
+vladislav@vladislav-VirtualBox:~$
+
+
+П.8)Создаем наш ключ с помощью: ssh-keygen. Она генерирует два ключа SSH.
+Пропускаем предложения о создании passphrase.
+Далее вводим ssh vladislav@"адрес хоста" (создав сессию в mobaXterm, заходим на сервер)
+Затем вводим ssh-copy-id vladislav@"адрес хоста" для копирования ключа с хоста на сервер.
+И в качестве проверки введем еще раз ssh vladislav@"адрес хоста". В рузельтате наблюдаем, что сервер не попросил пароль,
+вход был произведён с помощью ранее сгенерированных ключей.

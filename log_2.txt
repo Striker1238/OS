@@ -1,0 +1,64 @@
+vladislav@vladislav:~$ sudo useradd -s /bin/bash -m -d /home/user1 user1	//создаем нового пользователя (user1)
+vladislav@vladislav:~$ tail /etc/passwd						//показывает список пользователей и другие данные
+...
+vladislav:x:1000:1000:vladislav,,,:/home/vladislav:/bin/bash			//
+sshd:x:128:65534::/run/sshd:/usr/sbin/nologin					//
+user1:x:1001:1001::/home/user1:/bin/bash					//созданный пользователь
+
+vladislav@vladislav:~$ sudo groupadd newGroup					//создаем новую группу newGroup
+vladislav@vladislav:~$ tail /etc/group						//выводим список групп
+...
+vladislav:x:1000:								//
+sambashare:x:135:vladislav							//
+user1:x:1001:									//
+newGroup:x:1002:								//созданная группа
+
+vladislav@vladislav:~$ sudo usermod -aG newGroup user1				//добавляет пользователю user1 группу newGroup
+vladislav@vladislav:~$ groups user1						//показывает группы пользователя user1
+user1 : user1 newGroup								//группы пользователя user1
+
+vladislav@vladislav:~$ sudo deluser user1 newGroup				//удаление пользоветеля из группы
+Удаляется пользователь «user1» из группы «newGroup» ...	
+Готово.
+
+vladislav@vladislav:~$ tail /etc/group						//выводим список групп
+...
+vladislav:x:1000:								//
+sambashare:x:135:vladislav							//
+user1:x:1001:									//
+newGroup:x:1002:								//
+
+vladislav@vladislav:~$ su user1							//переключаемся на пользователя user1
+Пароль:
+		
+user1@vladislav:/home/vladislav$ sudo groupadd group				//проверяем, можно ли создать группу пользователем user1
+[sudo] пароль для user1: 							
+user1 отсутствует в файле sudoers. Данное действие будет занесено в журнал.	//сообщает что у нас недостаточно прав
+
+user1@vladislav:/home/vladislav$ tail /etc/group				//выводим список групп
+...
+...
+vladislav:x:1000:								//
+sambashare:x:135:vladislav							//
+user1:x:1001:									//
+newGroup:x:1002:								//
+
+user1@vladislav:/home/vladislav$ sudo groupdel newGroup				//удаляем группу newGroup, эту команду я выдал пользователю user1
+user1@vladislav:/home/vladislav$ tail /etc/group				//выводим список групп
+...
+vladislav:x:1000:								//
+sambashare:x:135:vladislav							//
+user1:x:1001:									//
+
+user1@vladislav:/home/vladislav$ exit						//выхожу с пользователя user1
+
+vladislav@vladislav:~$ sudo visudo						//тут открывается редактор файла, в котором нужно написать доступ 
+										//к команде groupdel 
+										//в конце файла дописал user1 ALL=/usr/sbin/groupdel
+
+vladislav@vladislav:~$ sudo userdel user1					//удаляем пользователя user1
+vladislav@vladislav:~$ tail /etc/passwd						//показывает список пользователей и другие данные
+...
+vladislav:x:1000:1000:vladislav,,,:/home/vladislav:/bin/bash			//
+sshd:x:128:65534::/run/sshd:/usr/sbin/nologin					//
+

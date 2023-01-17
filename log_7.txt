@@ -1,0 +1,10 @@
+vlad@vladislav-vb:~$ ps -AjH
+      1       1       1 ?        00:00:02 systemd
+    868     868     868 ?        00:00:00   systemd
+    912     912     912 ?        00:00:00     gvfsd
+   1463     912     912 tty2     00:00:00       gvfsd-trash
+
+vlad@vladislav-vb:~$ pstree -s 1890
+systemd───systemd───gnome-shell────┬─Xwayland
+                                   ├─gjs───5*[{gjs}]
+                                   └─9*[{gnome-shell}]
